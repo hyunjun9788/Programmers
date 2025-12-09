@@ -1,17 +1,39 @@
 function solution(priorities, location) {
-    let queue = priorities.map((priority, index) => [priority, index]);
-    let result = 0;
-    while (queue.length > 0) {
-        let max = Math.max(...queue.map(item => item[0])); 
-        let [priority, index] = queue.shift();
+    
+    let count =0 
+    
+    const newPriorities = priorities.map((p,i) => [p,i])
 
-        if (priority === max) {
-            result += 1;
-            if (index === location) { 
-                return result;
-            }
+    const queue = [...newPriorities]
+    
+    while(true){
+        const cur = queue.shift()
+        
+
+        const hasHigher = queue.some(([p]) => p > cur[0])
+        
+        if (hasHigher) {
+            queue.push(cur)
         } else {
-            queue.push([priority, index]);
+          count++
+        if (cur[1] === location) return count
         }
+        
     }
 }
+
+
+
+// [2, 1, 3, 2]
+// 2
+
+//  a b c d
+ 
+//  b c d a
+ 
+//  c d a b
+ 
+ 
+ 
+ 
+ 
